@@ -1,0 +1,333 @@
+[
+    {
+        "members": [
+            {
+                "name": "low",
+                "offset": 0,
+                "type": "felt"
+            },
+            {
+                "name": "high",
+                "offset": 1,
+                "type": "felt"
+            }
+        ],
+        "name": "Uint256",
+        "size": 2,
+        "type": "struct"
+    },
+    {
+        "data": [
+            {
+                "name": "implementation",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Upgraded",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "previousAdmin",
+                "type": "felt"
+            },
+            {
+                "name": "newAdmin",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "AdminChanged",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "account",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Paused",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "account",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Unpaused",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "to",
+                "type": "felt"
+            },
+            {
+                "name": "rToken",
+                "type": "felt"
+            },
+            {
+                "name": "rToken_underlying_asset",
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "type": "Uint256"
+            },
+            {
+                "name": "shares",
+                "type": "Uint256"
+            },
+            {
+                "name": "timestamp",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Stake",
+        "type": "event"
+    },
+    {
+        "data": [
+            {
+                "name": "to",
+                "type": "felt"
+            },
+            {
+                "name": "rToken",
+                "type": "felt"
+            },
+            {
+                "name": "rToken_underlying_asset",
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "type": "Uint256"
+            },
+            {
+                "name": "shares",
+                "type": "Uint256"
+            },
+            {
+                "name": "timestamp",
+                "type": "felt"
+            }
+        ],
+        "keys": [],
+        "name": "Unstake",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "name": "_v1_core_diamond_address",
+                "type": "felt"
+            }
+        ],
+        "name": "initializer",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "rToken",
+                "type": "felt"
+            },
+            {
+                "name": "amount",
+                "type": "Uint256"
+            },
+            {
+                "name": "receiver",
+                "type": "felt"
+            }
+        ],
+        "name": "stake",
+        "outputs": [
+            {
+                "name": "rToken_staking_shares",
+                "type": "Uint256"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "rToken",
+                "type": "felt"
+            },
+            {
+                "name": "rToken_amount_to_withdraw",
+                "type": "Uint256"
+            },
+            {
+                "name": "receiver",
+                "type": "felt"
+            }
+        ],
+        "name": "unstake",
+        "outputs": [
+            {
+                "name": "staking_shares_burn",
+                "type": "Uint256"
+            }
+        ],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "user",
+                "type": "felt"
+            },
+            {
+                "name": "rToken",
+                "type": "felt"
+            }
+        ],
+        "name": "get_user_staking_shares",
+        "outputs": [
+            {
+                "name": "user_staking_share",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "rToken",
+                "type": "felt"
+            }
+        ],
+        "name": "get_total_staking_shares",
+        "outputs": [
+            {
+                "name": "total_staking_share",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "user",
+                "type": "felt"
+            },
+            {
+                "name": "rToken",
+                "type": "felt"
+            }
+        ],
+        "name": "get_user_rTokens_staked",
+        "outputs": [
+            {
+                "name": "user_rTokens_staked_",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "get_v1_core_diamond_address",
+        "outputs": [
+            {
+                "name": "get_v1_core_diamond_address",
+                "type": "felt"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "v1_core_diamond_address_",
+                "type": "felt"
+            }
+        ],
+        "name": "set_v1_core_diamond_address",
+        "outputs": [],
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "rToken",
+                "type": "felt"
+            }
+        ],
+        "name": "exchange_rate",
+        "outputs": [
+            {
+                "name": "rTokens_to_shares",
+                "type": "Uint256"
+            },
+            {
+                "name": "shares_to_rTokens",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "rToken",
+                "type": "felt"
+            },
+            {
+                "name": "rToken_amount",
+                "type": "Uint256"
+            }
+        ],
+        "name": "preview_stake",
+        "outputs": [
+            {
+                "name": "get_calculated_shares",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "name": "rToken",
+                "type": "felt"
+            },
+            {
+                "name": "staking_shares_to_burn",
+                "type": "Uint256"
+            }
+        ],
+        "name": "preview_redeem",
+        "outputs": [
+            {
+                "name": "rToken_amount_to_withdraw",
+                "type": "Uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]

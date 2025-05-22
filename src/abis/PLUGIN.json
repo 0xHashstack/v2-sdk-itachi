@@ -1,0 +1,262 @@
+[
+  {
+    "members": [
+      {
+        "name": "low",
+        "offset": 0,
+        "type": "felt"
+      },
+      {
+        "name": "high",
+        "offset": 1,
+        "type": "felt"
+      }
+    ],
+    "name": "Uint256",
+    "size": 2,
+    "type": "struct"
+  },
+  {
+    "members": [
+      {
+        "name": "loan_id",
+        "offset": 0,
+        "type": "felt"
+      },
+      {
+        "name": "borrower",
+        "offset": 1,
+        "type": "felt"
+      },
+      {
+        "name": "market",
+        "offset": 2,
+        "type": "felt"
+      },
+      {
+        "name": "amount",
+        "offset": 3,
+        "type": "Uint256"
+      },
+      {
+        "name": "current_market",
+        "offset": 5,
+        "type": "felt"
+      },
+      {
+        "name": "current_amount",
+        "offset": 6,
+        "type": "Uint256"
+      },
+      {
+        "name": "state",
+        "offset": 8,
+        "type": "felt"
+      },
+      {
+        "name": "l3_integration",
+        "offset": 9,
+        "type": "felt"
+      },
+      {
+        "name": "l3_category",
+        "offset": 10,
+        "type": "felt"
+      },
+      {
+        "name": "created_at",
+        "offset": 11,
+        "type": "felt"
+      }
+    ],
+    "name": "Loan",
+    "size": 12,
+    "type": "struct"
+  },
+  {
+    "members": [
+      {
+        "name": "loan_id",
+        "offset": 0,
+        "type": "felt"
+      },
+      {
+        "name": "collateral_token",
+        "offset": 1,
+        "type": "felt"
+      },
+      {
+        "name": "amount",
+        "offset": 2,
+        "type": "Uint256"
+      },
+      {
+        "name": "created_at",
+        "offset": 4,
+        "type": "felt"
+      }
+    ],
+    "name": "Collateral",
+    "size": 5,
+    "type": "struct"
+  },
+  {
+    "data": [
+      {
+        "name": "new_signer",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "signer_changed",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "new_guardian",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "guardian_changed",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "new_guardian",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "guardian_backup_changed",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "active_at",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "escape_guardian_triggered",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "active_at",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "escape_signer_triggered",
+    "type": "event"
+  },
+  {
+    "data": [],
+    "keys": [],
+    "name": "escape_canceled",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "new_guardian",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "guardian_escaped",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "new_signer",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "signer_escaped",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "new_implementation",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "account_upgraded",
+    "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "constructor",
+    "outputs": [],
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "name": "market",
+        "type": "felt"
+      },
+      {
+        "name": "amount",
+        "type": "Uint256"
+      },
+      {
+        "name": "collateral_market",
+        "type": "felt"
+      },
+      {
+        "name": "collateral_amount",
+        "type": "Uint256"
+      },
+      {
+        "name": "reciever",
+        "type": "felt"
+      }
+    ],
+    "name": "borrow",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "loan_id",
+        "type": "felt"
+      }
+    ],
+    "name": "get_loan_by_id",
+    "outputs": [
+      {
+        "name": "loan",
+        "type": "Loan"
+      },
+      {
+        "name": "collateral",
+        "type": "Collateral"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "loan",
+        "type": "Loan"
+      }
+    ],
+    "name": "sync_loan_record",
+    "outputs": [],
+    "type": "function"
+  }
+]

@@ -1,0 +1,535 @@
+[
+    {
+      "name": "ContractImpl",
+      "type": "impl",
+      "interface_name": "common::interfaces::contract::IContract"
+    },
+    {
+      "name": "common::interfaces::contract::IContract",
+      "type": "interface",
+      "items": [
+        {
+          "name": "set_governor",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "address",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "get_governor",
+          "type": "function",
+          "inputs": [],
+          "outputs": [
+            {
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "state_mutability": "view"
+        }
+      ]
+    },
+    {
+      "name": "DialImpl",
+      "type": "impl",
+      "interface_name": "common::interfaces::dial::IDial"
+    },
+    {
+      "name": "core::integer::u256",
+      "type": "struct",
+      "members": [
+        {
+          "name": "low",
+          "type": "core::integer::u128"
+        },
+        {
+          "name": "high",
+          "type": "core::integer::u128"
+        }
+      ]
+    },
+    {
+      "name": "common::interfaces::dial::APRs",
+      "type": "struct",
+      "members": [
+        {
+          "name": "borrow_apr",
+          "type": "core::integer::u256"
+        },
+        {
+          "name": "deposit_apr",
+          "type": "core::integer::u256"
+        },
+        {
+          "name": "staking_apr",
+          "type": "core::integer::u256"
+        }
+      ]
+    },
+    {
+      "name": "common::structs::comptroller::ComptrollerStruct::InterestCurveParameters",
+      "type": "struct",
+      "members": [
+        {
+          "name": "apr_base_rate",
+          "type": "core::integer::u256"
+        },
+        {
+          "name": "apr_optimal_ur",
+          "type": "core::integer::u256"
+        },
+        {
+          "name": "optimal_ur",
+          "type": "core::integer::u256"
+        },
+        {
+          "name": "apr_max",
+          "type": "core::integer::u256"
+        }
+      ]
+    },
+    {
+      "name": "common::interfaces::dial::IDial",
+      "type": "interface",
+      "items": [
+        {
+          "name": "get_interest_rates",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "(core::integer::u256, core::integer::u256)"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "get_all_interest_rates",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "(core::integer::u256, core::integer::u256, core::integer::u256)"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "get_deposit_apr",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "core::integer::u256"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "get_staked_apr",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "core::integer::u256"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "get_borrow_apr",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "core::integer::u256"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "get_utilization_rate",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "core::integer::u256"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "update_state",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "asset",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "common::interfaces::dial::APRs"
+            }
+          ],
+          "state_mutability": "external"
+        },
+        {
+          "name": "set_interest_correlation_factor",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "factor",
+              "type": "core::felt252"
+            }
+          ],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "setDialParameters",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            },
+            {
+              "name": "apr_base_rate",
+              "type": "core::integer::u256"
+            },
+            {
+              "name": "apr_optimal_ur",
+              "type": "core::integer::u256"
+            },
+            {
+              "name": "optimal_ur",
+              "type": "core::integer::u256"
+            },
+            {
+              "name": "apr_max",
+              "type": "core::integer::u256"
+            }
+          ],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "set_interest_offset",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "offset",
+              "type": "core::felt252"
+            }
+          ],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "get_interest_correlation_factor",
+          "type": "function",
+          "inputs": [],
+          "outputs": [
+            {
+              "type": "core::felt252"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "getDialParameters",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "market",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [
+            {
+              "type": "common::structs::comptroller::ComptrollerStruct::InterestCurveParameters"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "get_interest_offset",
+          "type": "function",
+          "inputs": [],
+          "outputs": [
+            {
+              "type": "core::felt252"
+            }
+          ],
+          "state_mutability": "view"
+        }
+      ]
+    },
+    {
+      "name": "SecurityImpl",
+      "type": "impl",
+      "interface_name": "common::components::security::ISecurity"
+    },
+    {
+      "name": "core::bool",
+      "type": "enum",
+      "variants": [
+        {
+          "name": "False",
+          "type": "()"
+        },
+        {
+          "name": "True",
+          "type": "()"
+        }
+      ]
+    },
+    {
+      "name": "common::components::security::ISecurity",
+      "type": "interface",
+      "items": [
+        {
+          "name": "upgrade",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "new_class_hash",
+              "type": "core::starknet::class_hash::ClassHash"
+            }
+          ],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "pause",
+          "type": "function",
+          "inputs": [],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "unpause",
+          "type": "function",
+          "inputs": [],
+          "outputs": [],
+          "state_mutability": "external"
+        },
+        {
+          "name": "is_paused",
+          "type": "function",
+          "inputs": [],
+          "outputs": [
+            {
+              "type": "core::bool"
+            }
+          ],
+          "state_mutability": "view"
+        },
+        {
+          "name": "set_access_control",
+          "type": "function",
+          "inputs": [
+            {
+              "name": "access_control",
+              "type": "core::starknet::contract_address::ContractAddress"
+            }
+          ],
+          "outputs": [],
+          "state_mutability": "external"
+        }
+      ]
+    },
+    {
+      "name": "constructor",
+      "type": "constructor",
+      "inputs": [
+        {
+          "name": "accessControl",
+          "type": "core::starknet::contract_address::ContractAddress"
+        },
+        {
+          "name": "governor",
+          "type": "core::starknet::contract_address::ContractAddress"
+        },
+        {
+          "name": "interestcf",
+          "type": "core::felt252"
+        },
+        {
+          "name": "interest_offset",
+          "type": "core::felt252"
+        }
+      ]
+    },
+    {
+      "kind": "struct",
+      "name": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Upgraded",
+      "type": "event",
+      "members": [
+        {
+          "kind": "data",
+          "name": "class_hash",
+          "type": "core::starknet::class_hash::ClassHash"
+        }
+      ]
+    },
+    {
+      "kind": "enum",
+      "name": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Event",
+      "type": "event",
+      "variants": [
+        {
+          "kind": "nested",
+          "name": "Upgraded",
+          "type": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Upgraded"
+        }
+      ]
+    },
+    {
+      "kind": "struct",
+      "name": "openzeppelin::security::pausable::PausableComponent::Paused",
+      "type": "event",
+      "members": [
+        {
+          "kind": "data",
+          "name": "account",
+          "type": "core::starknet::contract_address::ContractAddress"
+        }
+      ]
+    },
+    {
+      "kind": "struct",
+      "name": "openzeppelin::security::pausable::PausableComponent::Unpaused",
+      "type": "event",
+      "members": [
+        {
+          "kind": "data",
+          "name": "account",
+          "type": "core::starknet::contract_address::ContractAddress"
+        }
+      ]
+    },
+    {
+      "kind": "enum",
+      "name": "openzeppelin::security::pausable::PausableComponent::Event",
+      "type": "event",
+      "variants": [
+        {
+          "kind": "nested",
+          "name": "Paused",
+          "type": "openzeppelin::security::pausable::PausableComponent::Paused"
+        },
+        {
+          "kind": "nested",
+          "name": "Unpaused",
+          "type": "openzeppelin::security::pausable::PausableComponent::Unpaused"
+        }
+      ]
+    },
+    {
+      "kind": "enum",
+      "name": "openzeppelin::security::reentrancyguard::ReentrancyGuardComponent::Event",
+      "type": "event",
+      "variants": []
+    },
+    {
+      "kind": "enum",
+      "name": "common::components::security::SecurityComponent::Event",
+      "type": "event",
+      "variants": []
+    },
+    {
+      "kind": "struct",
+      "name": "v1_core::contracts::dial::Dial::current_apr",
+      "type": "event",
+      "members": [
+        {
+          "kind": "data",
+          "name": "asset",
+          "type": "core::starknet::contract_address::ContractAddress"
+        },
+        {
+          "kind": "data",
+          "name": "borrow_apr",
+          "type": "core::integer::u16"
+        },
+        {
+          "kind": "data",
+          "name": "supply_apr",
+          "type": "core::integer::u16"
+        },
+        {
+          "kind": "data",
+          "name": "timestamp",
+          "type": "core::integer::u64"
+        }
+      ]
+    },
+    {
+      "kind": "enum",
+      "name": "v1_core::contracts::dial::Dial::Event",
+      "type": "event",
+      "variants": [
+        {
+          "kind": "flat",
+          "name": "UpgradeableEvent",
+          "type": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Event"
+        },
+        {
+          "kind": "flat",
+          "name": "PausableEvent",
+          "type": "openzeppelin::security::pausable::PausableComponent::Event"
+        },
+        {
+          "kind": "flat",
+          "name": "ReentrancyGuardEvent",
+          "type": "openzeppelin::security::reentrancyguard::ReentrancyGuardComponent::Event"
+        },
+        {
+          "kind": "flat",
+          "name": "SecurityEvent",
+          "type": "common::components::security::SecurityComponent::Event"
+        },
+        {
+          "kind": "nested",
+          "name": "current_apr",
+          "type": "v1_core::contracts::dial::Dial::current_apr"
+        }
+      ]
+    }
+  ]

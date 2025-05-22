@@ -1,0 +1,567 @@
+[
+  {
+    "name": "Liquidation",
+    "type": "impl",
+    "interface_name": "common::interfaces::liquidation::ILiquidation"
+  },
+  {
+    "name": "core::integer::u256",
+    "type": "struct",
+    "members": [
+      {
+        "name": "low",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "high",
+        "type": "core::integer::u128"
+      }
+    ]
+  },
+  {
+    "name": "common::interfaces::swapRouter::Route",
+    "type": "struct",
+    "members": [
+      {
+        "name": "token_from",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "token_to",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "exchange_address",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "percent",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "additional_swap_params",
+        "type": "core::array::Array::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "name": "common::interfaces::swapRouter::SwapInfo",
+    "type": "struct",
+    "members": [
+      {
+        "name": "fromToken",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "toToken",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "amount",
+        "type": "core::integer::u256"
+      },
+      {
+        "name": "routes",
+        "type": "core::array::Array::<common::interfaces::swapRouter::Route>"
+      }
+    ]
+  },
+  {
+    "name": "common::interfaces::borrow::RevertSpendParams",
+    "type": "struct",
+    "members": [
+      {
+        "name": "loan_id",
+        "type": "core::felt252"
+      },
+      {
+        "name": "min_amount_out",
+        "type": "core::integer::u256"
+      },
+      {
+        "name": "swap_info_sizes",
+        "type": "core::array::Array::<core::integer::u32>"
+      },
+      {
+        "name": "additional_params",
+        "type": "core::array::Array::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "name": "common::interfaces::borrow::RevertSpendAllParams",
+    "type": "struct",
+    "members": [
+      {
+        "name": "revertSpendParams",
+        "type": "common::interfaces::borrow::RevertSpendParams"
+      },
+      {
+        "name": "swaps",
+        "type": "core::array::Array::<common::interfaces::swapRouter::SwapInfo>"
+      }
+    ]
+  },
+  {
+    "name": "core::bool",
+    "type": "enum",
+    "variants": [
+      {
+        "name": "False",
+        "type": "()"
+      },
+      {
+        "name": "True",
+        "type": "()"
+      }
+    ]
+  },
+  {
+    "name": "common::interfaces::liquidation::ILiquidation",
+    "type": "interface",
+    "items": [
+      {
+        "name": "liquidate",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "loan_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "swap_info",
+            "type": "common::interfaces::swapRouter::SwapInfo"
+          },
+          {
+            "name": "revert_spend_all_params",
+            "type": "common::interfaces::borrow::RevertSpendAllParams"
+          },
+          {
+            "name": "min_amount",
+            "type": "core::integer::u256"
+          },
+          {
+            "name": "additional_params",
+            "type": "core::array::Array::<core::felt252>"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "smart_liquidate",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "loan_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "swap_info",
+            "type": "common::interfaces::swapRouter::SwapInfo"
+          },
+          {
+            "name": "revert_spend_all_params",
+            "type": "common::interfaces::borrow::RevertSpendAllParams"
+          },
+          {
+            "name": "min_amount",
+            "type": "core::integer::u256"
+          },
+          {
+            "name": "additional_params",
+            "type": "core::array::Array::<core::felt252>"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "self_liquidate",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "loan_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "swap_info",
+            "type": "common::interfaces::swapRouter::SwapInfo"
+          },
+          {
+            "name": "revert_spend_all_params",
+            "type": "common::interfaces::borrow::RevertSpendAllParams"
+          },
+          {
+            "name": "min_amount",
+            "type": "core::integer::u256"
+          },
+          {
+            "name": "additional_params",
+            "type": "core::array::Array::<core::felt252>"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "is_loan_liquidable",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "loan_id",
+            "type": "core::felt252"
+          },
+          {
+            "name": "additional_params",
+            "type": "core::array::Array::<core::felt252>"
+          }
+        ],
+        "outputs": [
+          {
+            "type": "core::bool"
+          }
+        ],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "name": "SecurityImpl",
+    "type": "impl",
+    "interface_name": "common::components::security::ISecurity"
+  },
+  {
+    "name": "common::components::security::ISecurity",
+    "type": "interface",
+    "items": [
+      {
+        "name": "upgrade",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "new_class_hash",
+            "type": "core::starknet::class_hash::ClassHash"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "pause",
+        "type": "function",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "unpause",
+        "type": "function",
+        "inputs": [],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "is_paused",
+        "type": "function",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::bool"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "name": "set_access_control",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "access_control",
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      }
+    ]
+  },
+  {
+    "name": "constructor",
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "accessControl",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "governor_address",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "avnuAddress",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "router_address",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Upgraded",
+    "type": "event",
+    "members": [
+      {
+        "kind": "data",
+        "name": "class_hash",
+        "type": "core::starknet::class_hash::ClassHash"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Event",
+    "type": "event",
+    "variants": [
+      {
+        "kind": "nested",
+        "name": "Upgraded",
+        "type": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Upgraded"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "openzeppelin::security::reentrancyguard::ReentrancyGuardComponent::Event",
+    "type": "event",
+    "variants": []
+  },
+  {
+    "kind": "struct",
+    "name": "openzeppelin::security::pausable::PausableComponent::Paused",
+    "type": "event",
+    "members": [
+      {
+        "kind": "data",
+        "name": "account",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "openzeppelin::security::pausable::PausableComponent::Unpaused",
+    "type": "event",
+    "members": [
+      {
+        "kind": "data",
+        "name": "account",
+        "type": "core::starknet::contract_address::ContractAddress"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "openzeppelin::security::pausable::PausableComponent::Event",
+    "type": "event",
+    "variants": [
+      {
+        "kind": "nested",
+        "name": "Paused",
+        "type": "openzeppelin::security::pausable::PausableComponent::Paused"
+      },
+      {
+        "kind": "nested",
+        "name": "Unpaused",
+        "type": "openzeppelin::security::pausable::PausableComponent::Unpaused"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "common::components::security::SecurityComponent::Event",
+    "type": "event",
+    "variants": []
+  },
+  {
+    "name": "common::structs::borrow::Loan",
+    "type": "struct",
+    "members": [
+      {
+        "name": "loan_id",
+        "type": "core::felt252"
+      },
+      {
+        "name": "borrower",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "market",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "amount",
+        "type": "core::integer::u256"
+      },
+      {
+        "name": "current_market",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "current_amount",
+        "type": "core::integer::u256"
+      },
+      {
+        "name": "state",
+        "type": "core::felt252"
+      },
+      {
+        "name": "l3_integration",
+        "type": "core::felt252"
+      },
+      {
+        "name": "l3_category",
+        "type": "core::felt252"
+      },
+      {
+        "name": "created_at",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
+    "name": "common::structs::borrow::Collateral",
+    "type": "struct",
+    "members": [
+      {
+        "name": "loan_id",
+        "type": "core::felt252"
+      },
+      {
+        "name": "collateral_token",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "amount",
+        "type": "core::integer::u256"
+      },
+      {
+        "name": "created_at",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "v1_core::contracts::liquidation::Liquidation::Liquidated",
+    "type": "event",
+    "members": [
+      {
+        "kind": "data",
+        "name": "loan_record",
+        "type": "common::structs::borrow::Loan"
+      },
+      {
+        "kind": "data",
+        "name": "collateral",
+        "type": "common::structs::borrow::Collateral"
+      },
+      {
+        "kind": "data",
+        "name": "liquidator",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "kind": "data",
+        "name": "repay_amount",
+        "type": "core::integer::u256"
+      },
+      {
+        "kind": "data",
+        "name": "returned_amount",
+        "type": "core::integer::u256"
+      },
+      {
+        "kind": "data",
+        "name": "protocol_share",
+        "type": "core::integer::u256"
+      },
+      {
+        "kind": "data",
+        "name": "timestamp",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "v1_core::contracts::liquidation::Liquidation::SmartLiquidation",
+    "type": "event",
+    "members": [
+      {
+        "kind": "data",
+        "name": "loan_id",
+        "type": "core::felt252"
+      },
+      {
+        "kind": "data",
+        "name": "liquidator",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "kind": "data",
+        "name": "is_profit",
+        "type": "core::bool"
+      },
+      {
+        "kind": "data",
+        "name": "amount_diff",
+        "type": "core::integer::u256"
+      },
+      {
+        "kind": "data",
+        "name": "timestamp",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "v1_core::contracts::liquidation::Liquidation::Event",
+    "type": "event",
+    "variants": [
+      {
+        "kind": "flat",
+        "name": "UpgradeableEvent",
+        "type": "openzeppelin::upgrades::upgradeable::UpgradeableComponent::Event"
+      },
+      {
+        "kind": "flat",
+        "name": "ReentracnyGuardEvent",
+        "type": "openzeppelin::security::reentrancyguard::ReentrancyGuardComponent::Event"
+      },
+      {
+        "kind": "flat",
+        "name": "PausableEvent",
+        "type": "openzeppelin::security::pausable::PausableComponent::Event"
+      },
+      {
+        "kind": "flat",
+        "name": "SecurityEvent",
+        "type": "common::components::security::SecurityComponent::Event"
+      },
+      {
+        "kind": "nested",
+        "name": "Liquidated",
+        "type": "v1_core::contracts::liquidation::Liquidation::Liquidated"
+      },
+      {
+        "kind": "nested",
+        "name": "SmartLiquidation",
+        "type": "v1_core::contracts::liquidation::Liquidation::SmartLiquidation"
+      }
+    ]
+  }
+]
