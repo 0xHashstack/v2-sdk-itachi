@@ -11,8 +11,7 @@ async function testGetLoanById() {
   try {
     // Initialize a proper StarkNet provider
     const provider = new RpcProvider({
-      nodeUrl:
-        "https://starknet-mainnet.g.alchemy.com/starknet/version/rpc/v0_8/ESy6CfoWC2d13xiZfJqMmTpQoFZh2Ste",
+      nodeUrl: "https://starknet-mainnet.public.blastapi.io",
     });
 
     // Configure the SDK with a proper provider object
