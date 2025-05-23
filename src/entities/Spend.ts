@@ -1004,6 +1004,85 @@ export class Spend extends Numerical {
   }
 
   /**
+   * Get the direct revert calldata for a loan based on its integration and category
+   * @param loan_id Loan ID to get revert calldata for
+   * @param maxSlippagePercent Maximum slippage percentage allowed (default 0.5%)
+   * @returns The appropriate calldata for reverting the loan
+   */
+  async getRevertCalldata(
+    loan_id: string,
+    maxSlippagePercent: number = 0.5
+  ): Promise<BigNumberish[]> {
+    try {
+      // Get the loan record to determine integration and category
+      const loanRecord = await this.getLoanRecord(loan_id);
+
+      // Get loan details from the router
+      const [loan, _] = await this.router.getLoanCollateralRecord(loan_id);
+      console.log("loan", loan);
+      const integration = Number(loan.l3_integration);
+      console.log("integration", integration);
+      const category = Number(loan.l3_category);
+      console.log("category", category);
+
+      // Route to the appropriate revert method based on integration and category
+      if (integration === IntegrationDapp.JediSwap) {
+        // JediSwap integration
+        if (category === SpendCategory.Swap) {
+          // Swap operation
+          const params = await this.getRevertJediSwapCalldata(
+            loanRecord,
+            maxSlippagePercent
+          );
+          console.log("params", params);
+          return params.revertSpendParams?.additional_params || [];
+        } else if (category === SpendCategory.Liquidity) {
+          // Liquidity operation
+          const params = await this.getRevertJediLiquidityCalldata(loanRecord);
+          console.log("params", params);
+          return params.revertSpendParams?.additional_params || [];
+        } else {
+          throw new Error(`Invalid JediSwap category: ${category}`);
+        }
+      } else if (integration === IntegrationDapp.MySwap) {
+        // MySwap integration
+        if (category === SpendCategory.Swap) {
+          // Swap operation
+          const params = await this.getRevertMySwapCalldata(
+            loanRecord,
+            maxSlippagePercent
+          );
+          console.log("params", params);
+          return params.revertSpendParams?.additional_params || [];
+        } else if (category === SpendCategory.Liquidity) {
+          // Liquidity operation
+          const params =
+            await this.getRevertMySwapLiquidityCalldata(loanRecord);
+          console.log("params", params);
+          return params.revertSpendParams?.additional_params || [];
+        } else {
+          throw new Error(`Invalid MySwap category: ${category}`);
+        }
+      } else if (integration === IntegrationDapp.zkLend) {
+        // ZkLend integration
+        if (category === SpendCategory.Liquidity) {
+          // Liquidity operation
+          const params = await this.getRevertZkLendLiquidityCalldata(loan_id);
+          console.log("params", params);
+          return params.revertSpendParams?.additional_params || [];
+        } else {
+          throw new Error(`Invalid ZkLend category: ${category}`);
+        }
+      }
+
+      throw new Error(`Invalid integration: ${integration} or loan not spent`);
+    } catch (error) {
+      console.error("Error in getRevertCalldata:", error);
+      throw error;
+    }
+  }
+
+  /**
    * Determine the appropriate revert parameters based on the loan's integration and category
    * @param loan_id Loan ID to revert
    * @param maxSlippagePercent Maximum slippage percentage allowed
